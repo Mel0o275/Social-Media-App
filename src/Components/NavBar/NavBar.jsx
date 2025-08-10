@@ -17,17 +17,13 @@ export default function NavBar() {
 		navigate('/login');
 	}
 
-	function GetUserData() {
-		return axios.get(`https://linked-posts.routemisr.com/users/profile-data`, {
-			headers: {
-				token: localStorage.getItem("token")
-			}
-		});
-	}
-
-	let { data, isError, error } = useQuery({
-		queryKey: ["userData"],
-		queryFn: GetUserData
+	const { data, isError, error, isLoading } = useQuery({
+		queryKey: ['userData'],
+		queryFn: () =>
+			axios.get(`https://linked-posts.routemisr.com/users/profile-data`, {
+				headers: { token: localStorage.getItem('token') },
+			}),
+		enabled: !!userLogin,
 	});
 
 	if (isError) {
