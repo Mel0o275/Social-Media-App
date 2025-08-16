@@ -57,49 +57,58 @@ export default function UpdateComment({ id, onCloseDropdown }) {
 
   return (
     <li>
+      {/* Dropdown Button */}
       <button
         onClick={() => setIsModalOpen(true)}
         className="block px-4 py-2 hover:bg-purple-900 w-full text-left cursor-pointer"
       >
         Update
       </button>
-
+  
+      {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-opacity-50 flex justify-center items-center z-50 bg-gradient-to-br from-black">
+        <div className="fixed inset-0 bg-black/70 flex justify-center items-center z-50">
           <div className="bg-gradient-to-br from-purple-900 to-purple-800 p-5 rounded-lg shadow-lg w-[90%] max-w-lg border border-purple-700 text-white relative">
             {/* Close button */}
             <button
               onClick={() => {
-                setIsModalOpen(false)
-                onCloseDropdown(false)
+                setIsModalOpen(false);
+                onCloseDropdown(false);
               }}
               className="absolute top-3 right-3 text-gray-300 hover:text-white text-xl cursor-pointer"
               disabled={isLoading}
             >
               ✕
             </button>
-
+  
+            {/* Title */}
             <h2 className="text-xl font-semibold mb-4">Update comment</h2>
-
+  
+            {/* Form */}
             <form onSubmit={handleSubmit(updateComment)}>
               <div className="relative mb-4">
-                <label htmlFor="postText" className="block mb-2 text-sm font-medium">
+                <label
+                  htmlFor="postText"
+                  className="block mb-2 text-sm font-medium"
+                >
                   📄 What's on your mind?
                 </label>
+  
                 <textarea
                   id="postText"
                   className="block w-full p-4 pr-16 pl-12 text-white border rounded-lg bg-black focus:ring-purple-500 focus:border-purple-500 resize-none"
                   rows={4}
-                  {...register('content')}
+                  {...register("content", { required: "Comment cannot be empty" })}
                   disabled={isLoading}
                 />
-
-
-                {/* Send Button Icon */}
+  
+                {/* Send Button */}
                 <button
                   type="submit"
                   className={`cursor-pointer absolute right-3 bottom-3 ${
-                    isLoading ? 'text-gray-400' : 'text-gray-500 hover:text-purple-500'
+                    isLoading
+                      ? "text-gray-400"
+                      : "text-gray-500 hover:text-purple-500"
                   }`}
                   disabled={isLoading}
                 >
@@ -110,13 +119,18 @@ export default function UpdateComment({ id, onCloseDropdown }) {
                   )}
                 </button>
               </div>
-
+  
               {/* Error message */}
-              <p className="text-red-600 font-bold">{formState.errors.body?.message}</p>
+              {formState.errors.content && (
+                <p className="text-red-500 font-medium">
+                  {formState.errors.content.message}
+                </p>
+              )}
             </form>
           </div>
         </div>
       )}
     </li>
-  )
+  );
+  
 }

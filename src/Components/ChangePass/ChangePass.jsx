@@ -46,53 +46,80 @@ export default function ChangePass() {
       >
         <i className="fa-solid fa-key"></i> Change
       </button>
-
+  
       {isOpen && (
         <div
-          className="fixed inset-0 bg-gradient-to-br from-purple-900 to-purple-800 rounded-2xl bg-opacity-60 flex justify-center items-center z-50 border-0"
+          className="fixed inset-0 bg-gradient-to-br from-purple-900 to-purple-800 bg-opacity-70 flex justify-center items-center z-50"
           onClick={() => setIsOpen(false)}
         >
           <div
-            className="bg-purple-900 p-6 rounded-lg shadow-lg max-w-sm w-full"
-            onClick={e => e.stopPropagation()}
+            className="bg-purple-900 p-4 sm:p-6 rounded-lg shadow-lg w-[90%] sm:max-w-sm"
+            onClick={(e) => e.stopPropagation()}
           >
-            <h3 className="text-white text-xl font-bold mb-4">Change Password</h3>
-            <form onSubmit={handleSubmit(changePass)} className="flex flex-col gap-4">
+            <h3 className="text-white text-lg sm:text-xl font-bold mb-4">
+              Change Password
+            </h3>
+            <form
+              onSubmit={handleSubmit(changePass)}
+              className="flex flex-col gap-3 sm:gap-4"
+            >
               <div>
-                <label className="block text-gray-300 mb-1" htmlFor="password">Current Password</label>
+                <label
+                  className="block text-gray-300 mb-1 text-sm sm:text-base"
+                  htmlFor="password"
+                >
+                  Current Password
+                </label>
                 <input
                   id="password"
                   type="password"
-                  {...register("password", { required: "Current password is required" })}
-                  className="w-full p-2 rounded bg-gray-800 text-white"
+                  {...register("password", {
+                    required: "Current password is required",
+                  })}
+                  className="w-full p-2 sm:p-3 rounded bg-gray-800 text-white text-sm sm:text-base"
                   autoComplete="current-password"
                 />
-                {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
+                {errors.password && (
+                  <p className="text-red-500 text-xs sm:text-sm mt-1">
+                    {errors.password.message}
+                  </p>
+                )}
               </div>
-
+  
               <div>
-                <label className="block text-gray-300 mb-1" htmlFor="newPassword">New Password</label>
+                <label
+                  className="block text-gray-300 mb-1 text-sm sm:text-base"
+                  htmlFor="newPassword"
+                >
+                  New Password
+                </label>
                 <input
                   id="newPassword"
                   type="password"
-                  {...register("newPassword", { required: "New password is required" })}
-                  className="w-full p-2 rounded bg-gray-800 text-white"
+                  {...register("newPassword", {
+                    required: "New password is required",
+                  })}
+                  className="w-full p-2 sm:p-3 rounded bg-gray-800 text-white text-sm sm:text-base"
                   autoComplete="new-password"
                 />
-                {errors.newPassword && <p className="text-red-500 text-sm mt-1">{errors.newPassword.message}</p>}
+                {errors.newPassword && (
+                  <p className="text-red-500 text-xs sm:text-sm mt-1">
+                    {errors.newPassword.message}
+                  </p>
+                )}
               </div>
-
-              <div className="flex justify-end gap-2">
+  
+              <div className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-3 mt-2">
                 <button
                   type="button"
-                  className="px-4 py-2 rounded bg-gray-700 hover:bg-gray-600 text-white cursor-pointer"
+                  className="px-3 sm:px-4 py-2 rounded bg-gray-700 hover:bg-gray-600 text-white cursor-pointer w-full sm:w-auto"
                   onClick={() => setIsOpen(false)}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded bg-purple-600 hover:bg-purple-700 text-white cursor-pointer disabled:cursor-not-allowed"
+                  className="px-3 sm:px-4 py-2 rounded bg-purple-600 hover:bg-purple-700 text-white cursor-pointer disabled:cursor-not-allowed w-full sm:w-auto"
                 >
                   Change
                 </button>
@@ -103,4 +130,5 @@ export default function ChangePass() {
       )}
     </>
   );
+  
 }

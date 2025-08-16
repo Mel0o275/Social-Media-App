@@ -86,14 +86,14 @@ export default function Home() {
 	return (
 		<>
 			<AddPost />
-
+	
 			{posts?.map((post) => (
 				<div
 					key={post._id}
-					className="relative my-8 w-full md:w-[80%] lg:w-[60%] mx-auto bg-gradient-to-br from-purple-900 to-purple-800 text-white rounded-lg shadow-lg p-5 border border-purple-700"
+					className="relative my-8 w-full sm:w-[95%] md:w-[80%] lg:w-[60%] mx-auto bg-gradient-to-br from-purple-900 to-purple-800 text-white rounded-lg shadow-lg p-5 border border-purple-700"
 				>
 					{/* Post Header */}
-					<div className="flex justify-between items-center mb-4">
+					<div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-3">
 						<div className="flex items-center gap-3">
 							<img
 								src={post.user.photo}
@@ -102,14 +102,14 @@ export default function Home() {
 							/>
 							<div className="flex flex-col">
 								<p className="font-medium">{post.user.name}</p>
-								<p className="text-xs text-gray-300">
+								<p className="text-xs text-gray-300 break-all">
 									{new Date(post.createdAt).toLocaleString()}
 								</p>
 							</div>
 						</div>
-
+	
 						{userData?._id === post.user._id && (
-							<div className="relative">
+							<div className="relative self-end sm:self-auto">
 								<button
 									onClick={() =>
 										setDropdownOpen(dropdownOpen === post._id ? null : post._id)
@@ -118,7 +118,7 @@ export default function Home() {
 								>
 									<i className="fa-solid fa-ellipsis-vertical"></i>
 								</button>
-
+	
 								{dropdownOpen === post._id && (
 									<div className="absolute right-0 mt-2 w-40 bg-black rounded-md shadow-lg z-50">
 										<ul className="py-1 text-sm text-gray-200">
@@ -137,10 +137,12 @@ export default function Home() {
 							</div>
 						)}
 					</div>
-
+	
 					{/* Post Body */}
-					{post.body && <p className="mb-4 text-gray-100">{post.body}</p>}
-
+					{post.body && (
+						<p className="mb-4 text-gray-100 break-words">{post.body}</p>
+					)}
+	
 					{post.image && (
 						<img
 							src={post.image}
@@ -148,7 +150,7 @@ export default function Home() {
 							className="w-full max-h-[400px] object-cover rounded-md border border-purple-700"
 						/>
 					)}
-
+	
 					{/* Add Comment Button */}
 					<div className="flex gap-3 mt-5 justify-center">
 						<Link
@@ -165,4 +167,5 @@ export default function Home() {
 			))}
 		</>
 	);
+	
 }

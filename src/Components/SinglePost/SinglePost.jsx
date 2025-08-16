@@ -78,98 +78,103 @@ export default function SinglePost() {
 
 	return (
 		<>
-			{/* Post Box */}
-			<div className="my-8 w-full md:w-[80%] lg:w-[60%] mx-auto bg-gradient-to-br from-purple-900 to-purple-800 text-white rounded-lg shadow-lg p-5 border border-purple-700">
-				{/* User Info & Timestamp */}
-				<div className="flex justify-between items-center mb-4">
-					<div className="flex items-center gap-3">
-						<img
-							src={postData?.user.photo}
-							alt={postData?.user.name}
-							className="w-10 h-10 rounded-full border-2 border-white shadow-sm"
-						/>
-						<div className="flex flex-col">
-							<p className="font-medium">{postData?.user.name}</p>
-							<p className="text-sm text-purple-200">
-								{new Date(postData?.createdAt).toLocaleString()}
-							</p>
-						</div>
-					</div>
+		  {/* Post Box */}
+		  <div className="my-8 w-full md:w-[80%] lg:w-[60%] mx-auto bg-gradient-to-br from-purple-900 to-purple-800 text-white rounded-lg shadow-lg p-5 border border-purple-700">
+			
+			{/* User Info & Timestamp */}
+			<div className="flex justify-between items-center mb-4">
+			  <div className="flex items-center gap-3">
+				<img
+				  src={postData?.user.photo}
+				  alt={postData?.user.name}
+				  className="w-10 h-10 rounded-full border-2 border-white shadow-sm"
+				/>
+				<div className="flex flex-col">
+				  <p className="font-medium">{postData?.user.name}</p>
+				  <p className="text-sm text-purple-200">
+					{new Date(postData?.createdAt).toLocaleString()}
+				  </p>
 				</div>
-
-				{/* Post Body */}
-				{postData?.body && (
-					<p className="mb-4 text-purple-100">{postData.body}</p>
-				)}
-
-				{/* Post Image */}
-				{postData?.image && (
+			  </div>
+			</div>
+	  
+			{/* Post Body */}
+			{postData?.body && (
+			  <p className="mb-4 text-purple-100">{postData.body}</p>
+			)}
+	  
+			{/* Post Image */}
+			{postData?.image && (
+			  <img
+				src={postData?.image}
+				alt="Post"
+				className="w-full max-h-[400px] object-cover rounded-md border border-purple-700"
+			  />
+			)}
+	  
+			{/* Modal for Add Comment */}
+			<Modal id={postData?._id} />
+		  </div>
+	  
+		  {/* Comments Section */}
+		  <div className="w-full md:w-[80%] lg:w-[60%] mx-auto mt-4 space-y-4">
+			<h2 className="text-xl font-semibold text-white mb-2">Comments</h2>
+	  
+			{postData?.comments?.map((comment) => (
+			  <div
+				key={comment._id}
+				className="p-3 rounded-md border border-purple-700 bg-purple-950 text-white"
+			  >
+				<div className="flex justify-between items-center mb-4">
+				  {/* Comment User Info */}
+				  <div className="flex items-center gap-3">
 					<img
-						src={postData?.image}
-						alt="Post"
-						className="w-full max-h-[400px] object-cover rounded-md border border-purple-700"
+					  src={comment.user?.photo}
+					  alt={comment.user?.name}
+					  className="w-10 h-10 rounded-full border-2 border-white shadow-sm"
 					/>
-				)}
-
-				{/* Modal for Add Comment */}
-				<Modal id={postData?._id} />
-			</div>
-
-			{/* Comments Section */}
-			<div className="w-full md:w-[80%] lg:w-[60%] mx-auto mt-4 space-y-4">
-				<h2 className="text-xl font-semibold text-white mb-2">Comments</h2>
-				{postData?.comments?.map((comment) => (
-					<div
-						key={comment._id}
-						className="p-3 rounded-md border border-purple-700 bg-purple-950 text-white"
-					>
-						<div className="flex justify-between items-center mb-4">
-							<div className="flex items-center gap-3">
-								<img
-									src={comment.user?.photo}
-									alt={comment.user?.name}
-									className="w-10 h-10 rounded-full border-2 border-white shadow-sm"
-								/>
-								<div className="flex flex-col">
-									<p className="font-medium">{comment.user?.name}</p>
-									<p className="text-sm text-purple-200">
-										{new Date(comment.createdAt).toLocaleString()}
-									</p>
-								</div>
-							</div>
-
-							{userData?._id === comment.commentCreator?._id && (
-								<div className="relative">
-									<button
-										onClick={() => toggleDropdown(comment._id)}
-										className="text-white cursor-pointer hover:text-gray-300 focus:outline-none text-xl"
-									>
-										⋯
-									</button>
-
-									{dropdownOpen === comment._id && (
-										<div className="absolute right-0 mt-2 w-40 bg-black rounded-md shadow-lg z-50">
-											<ul className="py-1 text-sm text-gray-200">
-												<UpdateComment
-													id={comment._id}
-													onCloseDropdown={() => setDropdownOpen(null)}
-												/>
-												<Deletecomment
-													id={comment._id}
-													onCloseDropdown={() => setDropdownOpen(null)}
-												/>
-											</ul>
-										</div>
-									)}
-								</div>
-							)}
-
-						</div>
-
-						<p className="text-purple-100">{comment.content}</p>
+					<div className="flex flex-col">
+					  <p className="font-medium">{comment.user?.name}</p>
+					  <p className="text-sm text-purple-200">
+						{new Date(comment.createdAt).toLocaleString()}
+					  </p>
 					</div>
-				))}
-			</div>
+				  </div>
+	  
+				  {/* Dropdown (Only for Owner of Comment) */}
+				  {userData?._id === comment.commentCreator?._id && (
+					<div className="relative">
+					  <button
+						onClick={() => toggleDropdown(comment._id)}
+						className="text-white cursor-pointer hover:text-gray-300 focus:outline-none text-xl"
+					  >
+						⋯
+					  </button>
+	  
+					  {dropdownOpen === comment._id && (
+						<div className="absolute right-0 mt-2 w-40 bg-black rounded-md shadow-lg z-50">
+						  <ul className="py-1 text-sm text-gray-200">
+							<UpdateComment
+							  id={comment._id}
+							  onCloseDropdown={() => setDropdownOpen(null)}
+							/>
+							<Deletecomment
+							  id={comment._id}
+							  onCloseDropdown={() => setDropdownOpen(null)}
+							/>
+						  </ul>
+						</div>
+					  )}
+					</div>
+				  )}
+				</div>
+	  
+				{/* Comment Content */}
+				<p className="text-purple-100">{comment.content}</p>
+			  </div>
+			))}
+		  </div>
 		</>
-	);
+	  );
+	  
 }

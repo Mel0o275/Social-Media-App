@@ -66,20 +66,21 @@ return (
         </label>
         <textarea
           id="postText"
-          className="block w-full p-4 pr-16 pl-12 text-purple-200 bg-gray-900 rounded-lg border border-purple-700 focus:ring-purple-500 focus:border-purple-500 placeholder-purple-400 resize-none"
+          className="block w-full p-3 sm:p-4 pr-12 sm:pr-16 pl-10 sm:pl-12 text-sm sm:text-base text-purple-200 bg-gray-900 rounded-lg border border-purple-700 focus:ring-purple-500 focus:border-purple-500 placeholder-purple-400 resize-none"
           placeholder="Write your post..."
           rows={4}
           {...register('body')}
           disabled={isLoading}
         />
 
+        {/* Upload icon */}
         <label
           htmlFor="img"
-          className={`absolute left-3 bottom-3 cursor-pointer ${
+          className={`absolute left-2 sm:left-3 bottom-2 sm:bottom-3 cursor-pointer ${
             isLoading ? 'text-gray-400' : 'text-gray-500 hover:text-purple-500'
           }`}
         >
-          <i className="fa-solid fa-image text-lg"></i>
+          <i className="fa-solid fa-image text-base sm:text-lg"></i>
         </label>
         <input
           type="file"
@@ -90,22 +91,24 @@ return (
           disabled={isLoading}
         />
 
+        {/* Submit button */}
         <button
           type="submit"
-          className={`cursor-pointer absolute right-3 bottom-3 ${
+          className={`cursor-pointer absolute right-2 sm:right-3 bottom-2 sm:bottom-3 ${
             isLoading ? 'text-gray-400' : 'text-gray-500 hover:text-purple-500'
           }`}
           disabled={isLoading}
         >
           {isLoading ? (
-            <i className="fas fa-spinner fa-spin text-lg"></i>
+            <i className="fas fa-spinner fa-spin text-base sm:text-lg"></i>
           ) : (
-            <i className="fa-solid fa-paper-plane text-lg"></i>
+            <i className="fa-solid fa-paper-plane text-base sm:text-lg"></i>
           )}
         </button>
       </div>
-      <p className='text-red-600 font-bold'>{formState.errors.body?.message}</p>
+      <p className="text-red-600 font-bold">{formState.errors.body?.message}</p>
     </form>
   </div>
 )
+
 }

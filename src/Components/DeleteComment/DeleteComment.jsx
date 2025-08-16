@@ -32,10 +32,10 @@ export default function Deletecomment({ id, onCloseDropdown }) {
   }
 
   return (
-    <li>
+    <li className="w-full">
       <button
-        className={`block px-4 py-2 w-full text-left cursor-pointer hover:bg-purple-900 ${
-          isLoading ? 'opacity-50 cursor-not-allowed' : ''
+        className={`block px-3 sm:px-4 py-2 w-full text-left text-sm sm:text-base cursor-pointer hover:bg-purple-900 rounded transition-colors ${
+          isLoading ? "opacity-50 cursor-not-allowed" : ""
         }`}
         onClick={deleteComment}
         disabled={isLoading}
@@ -44,4 +44,5 @@ export default function Deletecomment({ id, onCloseDropdown }) {
       </button>
     </li>
   );
+  
 }

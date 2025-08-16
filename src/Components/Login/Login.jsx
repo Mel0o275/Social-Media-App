@@ -58,56 +58,82 @@ export default function Login() {
 
   return (
     <div className="flex justify-center py-7">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="w-[700px]">
         {/* Header */}
         <h1 className="text-6xl font-bold mb-6 text-center text-white">Login</h1>
         {error && <h3 className="text-red-600 text-center font-bold">{error}</h3>}
-
+  
         {/* Email */}
-        <label htmlFor="email" className="block mb-2 text-sm font-medium text-white">
-          Email
-        </label>
-        <div className="w-[700px] relative mb-2">
-          <div className="absolute inset-y-0 left-0 flex items-center ps-3.5 pointer-events-none text-white">
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 16">
-              <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
-              <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
-            </svg>
+        <div className="mb-4">
+          <label
+            htmlFor="email"
+            className="block mb-2 text-sm font-medium text-white"
+          >
+            Email
+          </label>
+          <div className="relative">
+            <span className="absolute inset-y-0 left-0 flex items-center ps-3.5 pointer-events-none text-white">
+              <svg
+                className="w-4 h-4"
+                fill="currentColor"
+                viewBox="0 0 20 16"
+                aria-hidden="true"
+              >
+                <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
+                <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
+              </svg>
+            </span>
+            <input
+              type="email"
+              {...register("email")}
+              id="email"
+              className="border-0 ps-10 bg-gradient-to-br from-purple-900 to-black text-white text-sm rounded-lg focus:ring-purple-100 focus:border-purple-100 block w-full p-2.5"
+              placeholder="name@domain.com"
+              aria-invalid={!!formState.errors.email}
+            />
           </div>
-          <input
-            type="text"
-            {...register('email')}
-            id="email"
-            className="border-0 ps-10 bg-gradient-to-br from-purple-900 to-black text-white text-sm rounded-lg focus:ring-purple-100 focus:border-purple-100 block w-full p-2.5"
-            placeholder="name@domain.com"
-          />
+          {formState.errors.email && formState.touchedFields.email && (
+            <p className="text-red-600 text-center text-sm mt-1">
+              {formState.errors.email.message}
+            </p>
+          )}
         </div>
-        {formState.errors.email && formState.touchedFields.email && (
-          <p className="text-red-600 text-center mb-3">{formState.errors.email.message}</p>
-        )}
-
+  
         {/* Password */}
-        <label htmlFor="password" className="block mb-2 text-sm font-medium text-white">
-          Password
-        </label>
-        <div className="w-[700px] relative mb-2">
-          <div className="absolute inset-y-0 left-0 flex items-center ps-3.5 pointer-events-none text-white">
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 2a4 4 0 0 0-4 4v2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V6a4 4 0 0 0-4-4Zm-2 6V6a2 2 0 1 1 4 0v2H8Z" />
-            </svg>
+        <div className="mb-4">
+          <label
+            htmlFor="password"
+            className="block mb-2 text-sm font-medium text-white"
+          >
+            Password
+          </label>
+          <div className="relative">
+            <span className="absolute inset-y-0 left-0 flex items-center ps-3.5 pointer-events-none text-white">
+              <svg
+                className="w-4 h-4"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                aria-hidden="true"
+              >
+                <path d="M10 2a4 4 0 0 0-4 4v2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V6a4 4 0 0 0-4-4Zm-2 6V6a2 2 0 1 1 4 0v2H8Z" />
+              </svg>
+            </span>
+            <input
+              type="password"
+              {...register("password")}
+              id="password"
+              className="border-0 ps-10 bg-gradient-to-br from-purple-900 to-black text-white text-sm rounded-lg focus:ring-purple-100 focus:border-purple-100 block w-full p-2.5"
+              placeholder="••••••••"
+              aria-invalid={!!formState.errors.password}
+            />
           </div>
-          <input
-            type="password"
-            {...register('password')}
-            id="password"
-            className="border-0 ps-10 bg-gradient-to-br from-purple-900 to-black text-white text-sm rounded-lg focus:ring-purple-100 focus:border-purple-100 block w-full p-2.5"
-            placeholder="••••••••"
-          />
+          {formState.errors.password && formState.touchedFields.password && (
+            <p className="text-red-600 text-center text-sm mt-1">
+              {formState.errors.password.message}
+            </p>
+          )}
         </div>
-        {formState.errors.password && formState.touchedFields.password && (
-          <p className="text-red-600 text-center mb-3">{formState.errors.password.message}</p>
-        )}
-
+  
         {/* Submit Button */}
         {loading ? (
           <button className="mt-7 cursor-pointer animate-spin relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800" disabled="true">
@@ -120,7 +146,9 @@ export default function Login() {
             Login
           </span>
         </button>)}
+
       </form>
     </div>
   );
+  
 }

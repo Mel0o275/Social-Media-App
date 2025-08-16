@@ -46,7 +46,9 @@ export default function UserPosts() {
 							/>
 							<div className="flex flex-col">
 								<p className="font-medium">{post.user.name}</p>
-								<p className="text-xs text-gray-300">{new Date(post.createdAt).toLocaleString()}</p>
+								<p className="text-xs text-gray-300">
+									{new Date(post.createdAt).toLocaleString()}
+								</p>
 							</div>
 						</div>
 
@@ -67,7 +69,7 @@ export default function UserPosts() {
 											caption={post.body}
 											onCloseDropdown={() => setDropdownOpen(null)}
 										/>
-										<DeletePost 
+										<DeletePost
 											id={post._id}
 											onCloseDropdown={() => setDropdownOpen(null)}
 										/>
@@ -78,10 +80,8 @@ export default function UserPosts() {
 					</div>
 
 					{/* Post Content */}
-					<Link to={`/singlepost/${post.id}`}>
-						{post.body && (
-							<p className="mb-4 text-gray-100">{post.body}</p>
-						)}
+					<Link to={`/singlepost/${post._id}`}>
+						{post.body && <p className="mb-4 text-gray-100">{post.body}</p>}
 
 						{post.image && (
 							<img
@@ -95,7 +95,7 @@ export default function UserPosts() {
 					{/* Add Comment Button */}
 					<div className="flex gap-3 mt-5 justify-center">
 						<Link
-							to={`/singlepost/${post.id}`}
+							to={`/singlepost/${post._id}`}
 							className="cursor-pointer relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
 						>
 							<span className="flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent transition-all duration-300">
@@ -107,5 +107,6 @@ export default function UserPosts() {
 				</div>
 			))}
 		</>
-	)
+	);
+
 }

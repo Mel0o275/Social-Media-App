@@ -67,26 +67,30 @@ export default function Modal({ id }) {
             ✅ Comment added successfully!
           </div>
         )}
-
-        <form onSubmit={handleSubmit(addComment)} noValidate>
+  
+        <form onSubmit={handleSubmit(addComment)} noValidate className="w-full">
           <input type="hidden" {...register("post")} value={id} />
-
-          <label htmlFor="chat" className="sr-only">Your message</label>
-
+  
+          <label htmlFor="chat" className="sr-only">
+            Your message
+          </label>
+  
           <div className="flex items-center px-3 py-2 rounded-lg bg-black border border-purple-700">
-
             <textarea
               id="chat"
               rows="1"
               {...register("content")}
-              className="block mx-4 p-2.5 w-full text-sm text-purple-200 bg-gray-900 rounded-lg border border-purple-700 focus:ring-purple-500 focus:border-purple-500 placeholder-purple-400"
+              className="block mx-2 md:mx-4 p-2.5 w-full text-sm text-purple-200 bg-gray-900 rounded-lg border border-purple-700 focus:ring-purple-500 focus:border-purple-500 placeholder-purple-400 resize-none"
               placeholder="Your comment..."
             ></textarea>
-
+  
             <button
               type="submit"
-              className={`inline-flex justify-center p-2 text-purple-500 rounded-full cursor-pointer hover:bg-purple-800${isLoading ? 'text-gray-400' : 'text-gray-500 hover:text-purple-500'
-                }`}
+              className={`inline-flex justify-center p-2 text-purple-500 rounded-full cursor-pointer hover:bg-purple-800 transition ${
+                isLoading
+                  ? "text-gray-400 cursor-not-allowed"
+                  : "hover:text-purple-400"
+              }`}
               disabled={isLoading}
             >
               {isLoading ? (
@@ -96,12 +100,15 @@ export default function Modal({ id }) {
               )}
             </button>
           </div>
-
+  
           {formState.errors.content && formState.touchedFields.content && (
-            <p className="text-red-500 text-center mt-2">{formState.errors.content.message}</p>
+            <p className="text-red-500 text-center mt-2">
+              {formState.errors.content.message}
+            </p>
           )}
         </form>
       </div>
     </>
   );
+  
 }

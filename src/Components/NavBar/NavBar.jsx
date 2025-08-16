@@ -36,7 +36,7 @@ export default function NavBar() {
 		<nav className="bg-gradient-to-br from-purple-900 to-black border-gray-200 dark:bg-gray-900 fixed z-50 top-0 left-0 right-0">
 			<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 				<Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-				<i className="fa-brands fa-bluesky text-white text-3xl"></i>
+					<i className="fa-brands fa-bluesky text-white text-3xl"></i>
 					<span className="text-2xl font-semibold whitespace-nowrap dark:text-white">Melonista</span>
 				</Link>
 				<div className="flex items-center space-x-4">
@@ -87,7 +87,7 @@ export default function NavBar() {
 							)}
 						</div>
 					) : (
-						<div className="hidden md:flex space-x-2">
+						<div className="flex space-x-2">
 							<Link
 								to={'/register'}
 								className="cursor-pointer relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
@@ -105,9 +105,11 @@ export default function NavBar() {
 								</span>
 							</Link>
 						</div>
+
 					)}
 				</div>
 			</div>
 		</nav>
 	);
+
 }

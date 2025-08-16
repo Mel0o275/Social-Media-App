@@ -73,7 +73,7 @@ export default function UpdatePost({ id, caption, onCloseDropdown }) {
       >
         Update
       </button>
-
+  
       {isModalOpen && (
         <div className="fixed inset-0 bg-opacity-50 flex justify-center items-center z-50 bg-gradient-to-br from-black">
           <div className="bg-gradient-to-br from-purple-900 to-purple-800 p-5 rounded-lg shadow-lg w-[90%] max-w-lg border border-purple-700 text-white relative">
@@ -88,9 +88,9 @@ export default function UpdatePost({ id, caption, onCloseDropdown }) {
             >
               ✕
             </button>
-
+  
             <h2 className="text-xl font-semibold mb-4">Update Post</h2>
-
+  
             <form onSubmit={handleSubmit(updatePost)}>
               <div className="relative mb-4">
                 <label htmlFor="postText" className="block mb-2 text-sm font-medium">
@@ -104,7 +104,7 @@ export default function UpdatePost({ id, caption, onCloseDropdown }) {
                   defaultValue={caption}
                   disabled={isLoading}
                 />
-
+  
                 {/* Image Upload Icon */}
                 <label
                   htmlFor="img"
@@ -122,7 +122,7 @@ export default function UpdatePost({ id, caption, onCloseDropdown }) {
                   {...register('image')}
                   disabled={isLoading}
                 />
-
+  
                 {/* Send Button Icon */}
                 <button
                   type="submit"
@@ -138,7 +138,7 @@ export default function UpdatePost({ id, caption, onCloseDropdown }) {
                   )}
                 </button>
               </div>
-
+  
               {/* Error message */}
               <p className="text-red-600 font-bold">{formState.errors.body?.message}</p>
             </form>
@@ -147,4 +147,5 @@ export default function UpdatePost({ id, caption, onCloseDropdown }) {
       )}
     </li>
   )
+  
 }
